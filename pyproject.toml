@@ -8,6 +8,15 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.12"
 ultralytics = "^8.2.0"
+numpy = "^1.26.4"
+opencv-python = "^4.9.0.80"
+pandas = "^2.2.2"
+pillow = "^10.3.0"
+pyyaml = "^6.0.1"
+requests = "^2.31.0"
+tqdm = "^4.66.2"
+clearml = "^1.15.1"
+ipykernel = "^6.29.4"
 
 
 [build-system]

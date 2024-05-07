@@ -63,7 +63,7 @@ if __name__ == '__main__':
     #image_crop('../images', '../jsons', '../results')
 
     #!!CHANGE THIS PATH!!
-    external_folder_path = './data'
+    external_folder_path = '/home/pachy/Desktop/ACSAI/bloodyai/dataset/dl.raabindata.com/WBC/First_microscope'
 
     label_list = dict()
     external_folder = os.listdir(external_folder_path)

@@ -63,13 +63,17 @@ if __name__ == '__main__':
     #image_crop('../images', '../jsons', '../results')
 
     #!!CHANGE THIS PATH!!
-    external_folder_path = '../jsons'
+    external_folder_path = './data'
 
     label_list = dict()
     external_folder = os.listdir(external_folder_path)
-    for json_folder in external_folder:
-        json_dir_path = os.path.join(external_folder_path + '/' + json_folder)
-        json_dir = os.listdir(json_dir_path)
+    for folder in external_folder:
+        json_dir_path = os.path.join(external_folder_path + '/' + folder + '/jsons')
+        try:
+            json_dir = os.listdir(json_dir_path)
+        except:
+            continue
+            
         for json_file in json_dir:
             f = open(os.path.join(json_dir_path + "/" + json_file))
             data = json.load(f)

@@ -18,6 +18,8 @@ tqdm = "^4.66.2"
 clearml = "^1.15.1"
 ipykernel = "^6.29.4"
 d2l = "^1.0.3"
+scikit-learn = "^1.4.2"
+torcheval = "^0.0.7"
 
 
 [build-system]

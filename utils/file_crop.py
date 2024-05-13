@@ -3,7 +3,7 @@ import cv2
 import json
 
 labels_list = ['Neutrophil', 'Small Lymph', 'Large Lymph', 'Monocyte', 'Band', 'Eosinophil', 'Artifact', 'Unknn', 'Burst', 'Not centered', 'Meta' , 'None']
-external_dir_path = '../Data'
+external_dir_path = '/home/pachy/Desktop/ACSAI/bloodyai/dataset/dl.raabindata.com/WBC/Second_microscope'
 
 '''
 <summary> Image Crop and Label
@@ -65,8 +65,8 @@ def image_crop(image_dir_path, json_dir_path):
 
 def get_path_from_label(label):
     if label is None:
-        return (external_dir_path + '/Results/None')
-    return (external_dir_path + '/Results/' + label)
+        return (external_dir_path + '/Results/None/')
+    return (external_dir_path + '/Results/' + label + '/')
 
 if __name__ == '__main__':
     external_dir = os.listdir(external_dir_path)

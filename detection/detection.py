@@ -17,20 +17,14 @@ def detect(img):
     params = cv2.SimpleBlobDetector.Params()
 
     params.minThreshold = 80  # 80
-    params.maxThreshold = 255  # 255
     params.minDistBetweenBlobs = 250  # 250
 
     params.filterByArea = True
     params.minArea = 35
 
     params.filterByCircularity = False
-    params.minCircularity = 0.1
-
     params.filterByConvexity = False
-    params.minConvexity = 0.2
-
     params.filterByInertia = False
-    params.minInertiaRatio = 0.01
     # -----------------------------
 
     # DETECT BLOB KEYPOINTS

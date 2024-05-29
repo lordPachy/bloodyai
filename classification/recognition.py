@@ -112,7 +112,7 @@ def prepare_ResNet18(path_to_parameters):
 # 2. RUN THIS METHOD TO DO INFERENCE
 def inference_with_ResNet18(model, labels, img):
     transf = v2.Compose([v2.Resize((224, 224)), v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])
-    x = img
+    x = torch.from_numpy(img)
     c, h, w = x.shape
     x = torch.reshape(input=x, shape=(1, c, h, w))
     x = transf(x)
@@ -128,6 +128,6 @@ def inference_with_ResNet18(model, labels, img):
 
 
 # 3. SUBSTITUTE HERE YOUR PATH TO THE WEIGHTS...
-model = prepare_ResNet18('./parameters/state_dict_model_split_scheduler.pt')
+#model = prepare_ResNet18('./parameters/state_dict_model_split_scheduler.pt')
 # ...AND THE TEST IMAGE
-print(inference_with_ResNet18(model, labels, torchvision.io.read_image('./test.jpg')))
+#print(inference_with_ResNet18(model, labels, torchvision.io.read_image('./test.jpg')))

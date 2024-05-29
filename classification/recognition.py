@@ -102,7 +102,7 @@ def prepare_ResNet18(path_to_parameters):
     else:
         device = 'cpu'
     model = ResNet18()
-    model.load_state_dict(torch.load(path_to_parameters))
+    model.load_state_dict(torch.load(path_to_parameters, map_location = torch.device(device)))
     model = model.to(device)
     model.eval()
 
@@ -128,6 +128,6 @@ def inference_with_ResNet18(model, labels, img):
 
 
 # 3. SUBSTITUTE HERE YOUR PATH TO THE WEIGHTS...
-#model = prepare_ResNet18('./parameters/state_dict_model_split_scheduler.pt')
+model = prepare_ResNet18('./parameters/state_dict_model_split_scheduler.pt')
 # ...AND THE TEST IMAGE
-#print(inference_with_ResNet18(model, labels, torchvision.io.read_image('./test.jpg')))
+print(inference_with_ResNet18(model, labels, torchvision.io.read_image('./test.jpg')))

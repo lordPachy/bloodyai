@@ -5,7 +5,7 @@ import recognition
 
 def detect_and_classify(filepath: str):
     # LOAD DATA
-    model = recognition.prepare_ResNet18('./classification/parameters/state_dict_model.pt')
+    model = recognition.prepare_ResNet18('./classification/parameters/state_dict_model_split_scheduler.pt')
     img = cv2.imread(filepath)
     results = dict()
 

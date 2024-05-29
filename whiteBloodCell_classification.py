@@ -1,6 +1,6 @@
+import recognition
 import cv2
 import detection
-import recognition
 
 
 def detect_and_classify(filepath: str):
@@ -15,6 +15,7 @@ def detect_and_classify(filepath: str):
         x_left = int(coordinates[0]) - 287
         y_top = int(coordinates[1]) - 287
         cell_crop = img[y_top:y_top + 575, x_left:x_left + 575, :]
+        print(cell_crop.shape)
         label = recognition.inference_with_ResNet18(model, recognition.labels, cell_crop)
         results[(x_left, y_top)] = label
 
@@ -33,4 +34,4 @@ def detect_and_classify(filepath: str):
 
 
 if __name__ == "__main__":
-    detect_and_classify("[filepath]")
+    detect_and_classify("/home/pachy/Desktop/ACSAI/bloodyai/dataset/dl.raabindata.com/WBC/First_microscope/95-5-11-1/images/20160801_103550.jpg")

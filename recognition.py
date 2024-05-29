@@ -113,7 +113,8 @@ def prepare_ResNet18(path_to_parameters):
 def inference_with_ResNet18(model, labels, img):
     transf = v2.Compose([v2.Resize((224, 224)), v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])
     x = torch.from_numpy(img)
-    c, h, w = x.shape
+    h, w, c = x.shape
+    print(x.shape)
     x = torch.reshape(input=x, shape=(1, c, h, w))
     x = transf(x)
     if torch.cuda.is_available():

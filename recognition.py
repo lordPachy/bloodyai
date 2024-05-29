@@ -7,6 +7,7 @@ import torch
 import numpy as np
 import torch.utils
 import torch.utils.data
+import matplotlib.pyplot as plt
 
 
 # -------------------
@@ -114,9 +115,13 @@ def inference_with_ResNet18(model, labels, img):
     transf = v2.Compose([v2.Resize((224, 224)), v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])
     x = torch.from_numpy(img)
     h, w, c = x.shape
-    print(x.shape)
     x = torch.reshape(input=x, shape=(1, c, h, w))
     x = transf(x)
+    #DEBUG
+    plt.imshow(transforms.ToPILImage()(np.squeeze(x)), interpolation="bicubic")
+    plt.show()
+    print(x.shape)
+    #----------------
     if torch.cuda.is_available():
         device = 'cuda'
     else:

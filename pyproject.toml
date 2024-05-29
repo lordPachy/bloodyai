@@ -20,6 +20,7 @@ ipykernel = "^6.29.4"
 d2l = "^1.0.3"
 scikit-learn = "^1.4.2"
 torcheval = "^0.0.7"
+torchmetrics = "^1.4.0.post0"
 
 
 [build-system]

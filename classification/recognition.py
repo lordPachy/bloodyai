@@ -1,4 +1,4 @@
-ffrom d2l import torch as d2l
+from d2l import torch as d2l
 import numpy as np
 from torch import nn
 import torchvision
@@ -97,8 +97,13 @@ labels = ['Artifact', 'Burst', 'Eosinophil', 'Large Lymph', 'Monocyte', 'Neutrop
 
 # 1. RUN PREPARE_MODEL BEFORE ANY INFERENCE
 def prepare_ResNet18(path_to_parameters):
+    if torch.cuda.is_available():
+        device = 'cuda'
+    else:
+        device = 'cpu'
     model = ResNet18()
     model.load_state_dict(torch.load(path_to_parameters))
+    model = model.to(device)
     model.eval()
 
     return model
@@ -111,12 +116,18 @@ def inference_with_ResNet18(model, labels, img):
     c, h, w = x.shape
     x = torch.reshape(input=x, shape=(1, c, h, w))
     x = transf(x)
+    if torch.cuda.is_available():
+        device = 'cuda'
+    else:
+        device = 'cpu'
+    x = x.to(device)
     preds = model.forward(x)
+    preds = preds.to('cpu')
     i = np.argmax(preds.detach().numpy())
     return labels[i]
 
 
 # 3. SUBSTITUTE HERE YOUR PATH TO THE WEIGHTS...
-#model = prepare_ResNet18('./parameters/state_dict_model.pt')
+#model = prepare_ResNet18('./parameters/state_dict_model_split_scheduler.pt')
 # ...AND THE TEST IMAGE
-#print(inference_with_ResNet18(model, labels, './test.jpg'))
+#print(inference_with_ResNet18(model, labels, torchvision.io.read_image('./test.jpg')))

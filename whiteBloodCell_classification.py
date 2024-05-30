@@ -30,8 +30,9 @@ def detect_and_classify(filepath: str):
 
     img = cv2.resize(img[600:4700, :, :], None, None, fx=0.15, fy=0.15, interpolation=cv2.INTER_AREA)
     cv2.imshow("Results", img)
+    cv2.imwrite('/home/pachy/Desktop/ACSAI/bloodyai/classification/results/artifact.png', img)
     cv2.waitKey(0)
 
 
 if __name__ == "__main__":
-    detect_and_classify("/home/pachy/Desktop/ACSAI/bloodyai/dataset/dl.raabindata.com/WBC/First_microscope/95-5-11-1/images/20160801_103223.jpg")
+    detect_and_classify("/home/pachy/Desktop/ACSAI/bloodyai/dataset/dl.raabindata.com/WBC/First_microscope/95-5-11-1/images/20160801_103240.jpg")

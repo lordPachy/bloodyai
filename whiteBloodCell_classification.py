@@ -30,7 +30,7 @@ def detect_and_classify(filepath: str):
 
     img = cv2.resize(img[600:4700, :, :], None, None, fx=0.15, fy=0.15, interpolation=cv2.INTER_AREA)
     cv2.imshow("Results", img)
-    cv2.imwrite('/home/pachy/Desktop/ACSAI/bloodyai/classification/results/artifact.png', img)
+    #cv2.imwrite('/home/pachy/Desktop/ACSAI/bloodyai/classification/results/artifact.png', img)
     cv2.waitKey(0)
 
 

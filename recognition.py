@@ -3,11 +3,13 @@ import numpy as np
 from torch import nn
 import torchvision
 from torchvision.transforms import v2
+from torchvision import transforms
 import torch
 import numpy as np
 import torch.utils
 import torch.utils.data
 import matplotlib.pyplot as plt
+import cv2
 
 
 # -------------------
@@ -112,28 +114,27 @@ def prepare_ResNet18(path_to_parameters):
 
 # 2. RUN THIS METHOD TO DO INFERENCE
 def inference_with_ResNet18(model, labels, img):
-    transf = v2.Compose([v2.Resize((224, 224)), v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])
-    x = torch.from_numpy(img)
-    h, w, c = x.shape
-    x = torch.reshape(input=x, shape=(1, c, h, w))
-    x = transf(x)
+    transf = v2.Compose([v2.ToImage(), v2.Resize((224, 224)), v2.ToDtype(torch.float32, scale=True)])
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    x = transf(img)
+    x = torch.reshape(x, (1, *x.shape))
     #DEBUG
-    plt.imshow(transforms.ToPILImage()(np.squeeze(x)), interpolation="bicubic")
-    plt.show()
-    print(x.shape)
+    #plt.imshow(v2.ToPILImage()(x[0]))
+    #plt.show()
+    #print(x.shape)
     #----------------
     if torch.cuda.is_available():
         device = 'cuda'
     else:
         device = 'cpu'
     x = x.to(device)
-    preds = model.forward(x)
+    preds = model(x)
     preds = preds.to('cpu')
     i = np.argmax(preds.detach().numpy())
     return labels[i]
 
 
 # 3. SUBSTITUTE HERE YOUR PATH TO THE WEIGHTS...
-#model = prepare_ResNet18('./parameters/state_dict_model_split_scheduler.pt')
+#model = prepare_ResNet18('./classification/parameters/state_dict_model_split_scheduler.pt')
 # ...AND THE TEST IMAGE
-#print(inference_with_ResNet18(model, labels, torchvision.io.read_image('./test.jpg')))
+#print(inference_with_ResNet18(model, labels, torchvision.io.read_image('./classification/test.jpg')))

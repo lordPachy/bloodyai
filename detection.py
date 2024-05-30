@@ -3,7 +3,7 @@ import cv2
 
 def detect(img):
     # MASK
-    mask = cv2.imread('./detection/mask.jpg')
+    mask = cv2.imread('./mask.jpg')
     img = cv2.bitwise_and(img, mask)
 
     # FILTER

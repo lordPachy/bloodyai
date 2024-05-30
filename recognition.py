@@ -115,7 +115,10 @@ def prepare_ResNet18(path_to_parameters):
 # 2. RUN THIS METHOD TO DO INFERENCE
 def inference_with_ResNet18(model, labels, img):
     transf = v2.Compose([v2.ToImage(), v2.Resize((224, 224)), v2.ToDtype(torch.float32, scale=True)])
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    try:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    except:
+        return 'no img found'
     x = transf(img)
     x = torch.reshape(x, (1, *x.shape))
     #DEBUG

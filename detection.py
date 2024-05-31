@@ -1,5 +1,18 @@
 import cv2
 
+'''
+<summary> Detection
+Input:
+- img: a numpy array of the input image
+Output: 
+- coordinates: the coordinates of the centroids of the detected cells
+Description:
+This function takes an input image, masks out the exterior of the scope,
+applies a saturation filter to it and uses SimpleBlobDetector with the set parameters
+to detect and return the white blood cells in the image.
+</summary>
+'''
+
 
 def detect(img):
     # MASK

@@ -2,6 +2,19 @@ import recognition
 import cv2
 import detection
 
+'''
+<summary> White Blood Cell Classification
+Input:
+- filepath: a path to the file of the input image
+Output: void
+Description:
+This function is the wrapper of the detection and classification system.
+It detects the white blood cells in the file, classifies them and
+shows the results by showing the input image with bounding boxes and
+labels indicating the white blood cells and their type.
+</summary>
+'''
+
 
 def detect_and_classify(filepath: str):
     # LOAD DATA
@@ -15,7 +28,6 @@ def detect_and_classify(filepath: str):
         x_left = int(coordinates[0]) - 287
         y_top = int(coordinates[1]) - 287
         cell_crop = img[y_top:y_top + 575, x_left:x_left + 575, :]
-        #print(cell_crop.shape)
         label = recognition.inference_with_ResNet18(model, recognition.labels, cell_crop)
         results[(x_left, y_top)] = label
 
@@ -30,9 +42,8 @@ def detect_and_classify(filepath: str):
 
     img = cv2.resize(img[600:4700, :, :], None, None, fx=0.15, fy=0.15, interpolation=cv2.INTER_AREA)
     cv2.imshow("Results", img)
-    #cv2.imwrite('/home/pachy/Desktop/ACSAI/bloodyai/classification/results/artifact.png', img)
     cv2.waitKey(0)
 
 
 if __name__ == "__main__":
-    detect_and_classify("/home/pachy/Desktop/ACSAI/bloodyai/dataset/dl.raabindata.com/WBC/First_microscope/95-5-11-1/images/20160801_103240.jpg")
+    detect_and_classify("[filepath]")

@@ -5,7 +5,6 @@ import torchvision
 from torchvision.transforms import v2
 from torchvision import transforms
 import torch
-import numpy as np
 import torch.utils
 import torch.utils.data
 import matplotlib.pyplot as plt
@@ -121,11 +120,6 @@ def inference_with_ResNet18(model, labels, img):
         return 'no img found'
     x = transf(img)
     x = torch.reshape(x, (1, *x.shape))
-    #DEBUG
-    #plt.imshow(v2.ToPILImage()(x[0]))
-    #plt.show()
-    #print(x.shape)
-    #----------------
     if torch.cuda.is_available():
         device = 'cuda'
     else:
